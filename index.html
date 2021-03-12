@@ -52,27 +52,87 @@
             <div id="content">
                 <div class="row" style="width: 100%;">
                     <div class="col-12 col-md-6 ">
-                        <h4 style="padding-top: 4px;">Danh sách khách hàng</h4>
+                        <h4 style="padding-top: 4px;">Danh sách nhân viên</h4>
                     </div>
-                    <div class="col-12 col-md-6">
+                    <div class="col-12 col-md-6 pr-0">
                         <div class="fr-md">
-                            <button id="add-btn" class="btn"><img class="img-btn" src="icon/add.png" alt="thêm"> Thêm khách
-                                hàng</button>
+                            <button id="add-btn" class="btn btn-green"><img class="img-btn" src="icon/add.png"
+                                    alt="thêm" title="Thêm nhân viên mới"> Thêm
+                                nhân viên</button>
                         </div>
                     </div>
                 </div>
 
                 <!-- input  -->
-                <div class="row" style="width: 100%;">
-                    <div class="col-12 col-md-6 ">
-                        <input type="text" class="form-control" id="search-input">
+                <div class="row mt-2" style="width: 100%;">
+                    <div class="col-12 col-md-10 form-inline">
+                        <input type="text" class="form-control mr-2 mt-1" id="search-input"
+                            placeholder="Tìm kiếm theo Mã, Tên hoặc Số điện thoại">
+                        <select class="form-control mr-2 mt-1">
+                            <option selected>Tất cả phòng ban</option>
+                            <option>Phòng ban 1</option>
+                            <option>Phòng ban 2</option>
+                            <option>Phòng ban 3</option>
+                        </select>
+                        <select class="form-control mr-2 mt-1">
+                            <option selected>Tất cả vị trí</option>
+                            <option>Vị trí 1</option>
+                            <option>Vị trí 2</option>
+                            <option>Vị trí 3</option>
+                        </select>
                     </div>
-                    <div class="col-12 col-md-6">
+                    <div class="col-12 col-md-2">
                         <div class="fr-md">
-                            <button id="add-btn" class="btn"><img class="img-btn" src="icon/add.png" alt="thêm"> Thêm khách
-                                hàng</button>
+                            <button id="refesh-btn" class="btn mt-1"><img class="img-btn" src="icon/refresh.png"
+                                    alt="refesh" title="Tìm kiếm về mặc định"></button>
                         </div>
                     </div>
+                </div>
+
+                <!-- table  -->
+                <div class="mt-2">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Mã nhân viên</th>
+                                <th>Họ và tên</th>
+                                <th>Giới tính</th>
+                                <th>Ngày sinh</th>
+                                <th>Điện thoại</th>
+                                <th>Email</th>
+                                <th>Chức vụ</th>
+                                <th>Phòng ban</th>
+                                <th class="text-right">Mức lương cơ bản</th>
+                                <th>Tình trạng công việc</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>NV-532408</td>
+                                <td>Hồ Văn Long</td>
+                                <td></td>
+                                <td>11/08/1978</td>
+                                <td>0940458449</td>
+                                <td>cuon@example.com</td>
+                                <td>Giám đốc</td>
+                                <td>Phòng nhân sự</td>
+                                <td class="text-right">17.739.391</td>
+                                <td>Đang thử việc</td>
+                            </tr>
+                            <tr>
+                                <td>NV-532408</td>
+                                <td>Hồ Văn Long</td>
+                                <td></td>
+                                <td>11/08/1978</td>
+                                <td>0940458449</td>
+                                <td>cuon@example.com</td>
+                                <td>Giám đốc</td>
+                                <td>Phòng nhân sự</td>
+                                <td class="text-right">17.739.391</td>
+                                <td>Đang thử việc</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
