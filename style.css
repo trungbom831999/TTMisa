@@ -1,0 +1,104 @@
+a{
+    color: #000 !important;
+}
+
+a:hover {
+    text-decoration: none !important;
+}
+
+#doc {
+    /* display: flex; */
+}
+
+
+#main-content {
+    width: auto;
+    /* height: 100vh; */
+    border-bottom: 1px solid #cccccc;
+}
+
+/* CSS side-bar  */
+#side-bar {
+    float: left;
+    width: 250px;
+    height: 100vh;
+    border-right: 1px solid #cccccc;
+    background-color: #fff;
+}
+
+.img-toggle {
+    width: 24px;
+    margin-top: 12px;
+    margin-left: 12px;
+    margin-right: 8px;
+}
+
+#logo {
+    margin-top: 8px;
+    width: 120px;
+}
+
+.btn {
+    width: 100%;
+    text-align: left !important;
+}
+
+.btn:hover {
+    background-color: #cccccc;
+}
+
+.img-btn {
+    width: 20px;
+    margin: 0 4px;
+    margin-bottom: 4px;
+}
+
+/* CSS header  */
+#header {
+    border-bottom: 1px solid #cccccc;
+}
+
+#select-restaurant {
+    border: none;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 12px 16px;
+}
+
+#info {
+    padding-top: 12px;
+    padding-bottom: 4px;
+    display: -webkit-inline-box;
+}
+
+.fr-md{
+    float: right;
+}
+
+@media (max-width:768px){
+    .fr-md{
+        float: left;
+    }
+}
+
+.img-avatar {
+    width: 28px;
+}
+
+/* CSS content  */
+#content {
+    display: flex;
+    flex-direction: column;
+    padding: 8px;
+    padding-right: 0;
+}
+
+#add-btn{
+    background-color: #009933;
+    color: #fff;
+}
+
+#search-input{
+    background: url(icon/search.png) no-repeat scroll 7px 7px;
+padding-left:30px;
+}
