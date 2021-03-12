@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="jquery/jquery.min.js"></script>
     <script src="bootstrap/bootstrap.min.js"></script>
     <script src="bootstrap/popper.min.js"></script>
 </head>
@@ -90,8 +91,8 @@
                 </div>
 
                 <!-- table  -->
-                <div class="mt-2">
-                    <table class="table table-striped">
+                <div id="info-employees" class="mt-2">
+                    <table id="table-employees" class="table table-striped">
                         <thead>
                             <tr>
                                 <th>Mã nhân viên</th>
@@ -106,37 +107,28 @@
                                 <th>Tình trạng công việc</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>NV-532408</td>
-                                <td>Hồ Văn Long</td>
-                                <td></td>
-                                <td>11/08/1978</td>
-                                <td>0940458449</td>
-                                <td>cuon@example.com</td>
-                                <td>Giám đốc</td>
-                                <td>Phòng nhân sự</td>
-                                <td class="text-right">17.739.391</td>
-                                <td>Đang thử việc</td>
-                            </tr>
-                            <tr>
-                                <td>NV-532408</td>
-                                <td>Hồ Văn Long</td>
-                                <td></td>
-                                <td>11/08/1978</td>
-                                <td>0940458449</td>
-                                <td>cuon@example.com</td>
-                                <td>Giám đốc</td>
-                                <td>Phòng nhân sự</td>
-                                <td class="text-right">17.739.391</td>
-                                <td>Đang thử việc</td>
-                            </tr>
+                        <tbody id="tbody-employees">
                         </tbody>
                     </table>
+                </div>
+
+                <!-- pagination  -->
+                <div id="pagination" class="row mt-2">
+                    <div class="col-4">
+                        <p class="pt-2 pl-3">Hiển thị 1-10/1000 nhân viên</p>
+                    </div>
+                    <div class="col-4 text-center">
+                        <button class="btn pagination-btn" id=""></button>
+                    </div>
+                    <div class="col-4 text-right">
+                        <p class="pt-2 pr-3">10 nhân viên/trang</p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </body>
+
+<script src="employee.js"></script>
 
 </html>

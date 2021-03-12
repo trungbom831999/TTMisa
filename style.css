@@ -6,6 +6,25 @@ a:hover {
     text-decoration: none !important;
 }
 
+/* custom scroll  */
+::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 4px#E5E5E5; 
+    border-radius: 8px;
+  }
+   
+  ::-webkit-scrollbar-thumb {
+    background:  #BBBBBB ; 
+    border-radius: 8px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background:  #BBBBBB ; 
+  }
+
 #doc {
     /* display: flex; */
 }
@@ -115,4 +134,20 @@ a:hover {
 /* CSS table  */
 th{
     border-top: none !important;
+}
+
+#info-employees{ 
+    overflow-y: auto;
+    height: 70vh; 
+}
+#info-employees thead th {
+    position: sticky;
+    top: 0;
+    background-color: #fff;
+} 
+
+/* CSS pagination  */
+.pagination-btn{
+    border-radius: 50% !important;
+    width: fit-content;
 }
