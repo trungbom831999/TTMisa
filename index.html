@@ -57,8 +57,9 @@
                     </div>
                     <div class="col-12 col-md-6 pr-0">
                         <div class="fr-md">
-                            <button id="add-btn" class="btn btn-green"><img class="img-btn" src="icon/add.png"
-                                    alt="thêm" title="Thêm nhân viên mới"> Thêm
+                            <button id="add-btn" class="btn btn-green" data-toggle="modal"
+                                data-target="#add-employee-modal"><img class="img-btn" src="icon/add.png" alt="thêm"
+                                    title="Thêm nhân viên mới"> Thêm
                                 nhân viên</button>
                         </div>
                     </div>
@@ -113,17 +114,209 @@
                 </div>
 
                 <!-- pagination  -->
-                <div id="pagination" class="row mt-2">
-                    <div class="col-4">
+                <div class="row mt-2">
+                    <div class="col-md-3">
                         <p class="pt-2 pl-3">Hiển thị 1-10/1000 nhân viên</p>
                     </div>
-                    <div class="col-4 text-center">
-                        <button class="btn pagination-btn" id=""></button>
+                    <div id="pagination" class="col-md-6 text-center">
+                        <button class="btn pagination-btn" id="first-page"></button>
+                        <button class="btn pagination-btn" id="prev-page"></button>
+                        <button class="btn pagination-btn bg-grey" id="current-page">1</button>
+                        <button class="btn pagination-btn bg-grey">2</button>
+                        <button class="btn pagination-btn bg-grey">3</button>
+                        <button class="btn pagination-btn bg-grey">4</button>
+                        <button class="btn pagination-btn" id="next-page"></button>
+                        <button class="btn pagination-btn" id="last-page"></button>
                     </div>
-                    <div class="col-4 text-right">
+                    <div class="col-md-3 text-right">
                         <p class="pt-2 pr-3">10 nhân viên/trang</p>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- modal thêm nhân viên  -->
+    <div class="modal fade" id="add-employee-modal">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">THÔNG TIN NHÂN VIÊN</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-2 pr-0">
+                            <!-- <img src="img/default-avatar.jpg" class="rounded-circle border-grey" alt="Ảnh đại diện" width="200" height="200">
+                    <p>Vui lòng chọn ảnh có định dạng .jpg, .jpeg, .png, .gif</p> -->
+                            <figure>
+                                <img src="img/default-avatar.jpg" class="rounded-circle border-grey" alt="Ảnh đại diện"
+                                    width="100%">
+                                <figcaption class="text-center">(Vui lòng chọn ảnh có định dạng .jpg, .jpeg, .png, .gif)
+                                </figcaption>
+                            </figure>
+                        </div>
+                        <div class="col-10">
+                            <h5>A.THÔNG TIN CHUNG:</h5>
+                            <hr class="hr-green">
+                            <br>
+
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="employee-code">Mã nhân viên (<p class="text-danger d-inline">*</p>
+                                            )</label>
+                                        <input type="text" class="form-control" id="employee-code">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="full-name">Họ và tên (<p class="text-danger d-inline">*</p>)</label>
+                                        <input type="text" class="form-control" id="full-name">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="date-of-birth">Ngày sinh</label>
+                                        <input type="date" class="form-control" id="date-of-birth">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="gender">Giới tính</label>
+                                        <select class="form-control" id="gender">
+                                            <option value="1">Nam</option>
+                                            <option value="0">Nữ</option>
+                                            <option>Khác</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="identity-number">Số CMTND/ Căn cước (<p
+                                                class="text-danger d-inline">*</p>
+                                            )</label>
+                                        <input type="text" class="form-control" id="identity-number">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="identity-date">Ngày cấp</label>
+                                        <input type="date" class="form-control" id="identity-date">
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="identity-place">Nơi cấp</label>
+                                        <input type="text" class="form-control" id="identity-place">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="email">Email (<p class="text-danger d-inline">*</p>
+                                            )</label>
+                                        <input type="email" class="form-control" id="email">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="phone-number">Số điện thoại (<p class="text-danger d-inline">*</p>
+                                            )</label>
+                                        <input type="tel" class="form-control" id="phone-number">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h5>B.THÔNG TIN CÔNG VIỆC:</h5>
+                            <hr class="hr-green">
+                            <br>
+
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <div class="form-group">
+                                            <label for="position-name">Vị trí</label>
+                                            <select class="form-control" id="position-name">
+                                                <option value="1">Chủ tịch</option>
+                                                <option value="2">Giám đốc</option>
+                                                <option value="3">Phó giám đốc</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="department-name">Phòng ban</label>
+                                        <select class="form-control" id="department-name">
+                                            <option value="1">Phòng nhân sự</option>
+                                            <option value="2">Phòng đào tạo</option>
+                                            <option value="3">Phòng Marketing</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="personal-tax-code">Mã số thuế cá nhân</label>
+                                        <input type="text" class="form-control" id="personal-tax-code">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="salary">Mức lương cơ bản</label>
+                                        <input type="text" class="form-control text-right" id="salary">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="join-date">Ngày gia nhập công ty</label>
+                                        <input type="date" class="form-control" id="join-date">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="work-status-name">Tình trạng công việc</label>
+                                        <select class="form-control" id="work-status-name">
+                                            <option value="1">Đang làm việc</option>
+                                            <option value="2">Đang thử việc</option>
+                                            <option value="3">Xem xét</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer bg-grey">
+                    <button type="button" class="btn btn-modal-footer" data-dismiss="modal">Hủy</button>
+                    <button id="save-employee-btn" class="btn btn-green btn-modal-footer"><img class="img-btn" src="icon/add.png" alt="Lưu"
+                                    title="Lưu nhân viên mới">Lưu</button>
+                </div>
+
             </div>
         </div>
     </div>
