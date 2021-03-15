@@ -21,6 +21,7 @@ a:hover {
 }
 
 /* CSS side-bar  */
+
 #side-bar {
     float: left;
     width: 250px;
@@ -56,6 +57,7 @@ a:hover {
 }
 
 /* CSS header  */
+
 #header {
     border-bottom: 1px solid #cccccc;
 }
@@ -88,6 +90,7 @@ a:hover {
 }
 
 /* CSS content  */
+
 #content {
     display: flex;
     flex-direction: column;
@@ -116,6 +119,7 @@ a:hover {
 }
 
 /* CSS table  */
+
 th {
     border-top: none !important;
 }
@@ -132,6 +136,7 @@ th {
 }
 
 /* custom scroll table */
+
 #info-employees::-webkit-scrollbar {
     width: 8px;
     height: 8px;
@@ -148,6 +153,7 @@ th {
 }
 
 /* CSS pagination  */
+
 .pagination-btn {
     border-radius: 50% !important;
     width: 28px;
@@ -189,6 +195,7 @@ th {
 }
 
 /* CSS modal  */
+
 .border-grey {
     border: 1px solid #E5E5E5 !important;
 }
@@ -201,12 +208,76 @@ th {
     margin: 0;
 }
 
-#add-employee-modal input,
-#add-employee-modal select {
+#avatar-img {
+    cursor: pointer;
+}
+
+#add-employee-modal input, #add-employee-modal select {
     color: #000;
 }
 
 .btn-modal-footer {
     width: 100px;
     height: 44px;
+}
+
+/* CSS menu right click   */
+
+.dropdown-menu {
+    position: relative;
+    background: #ffffff;
+    border: 1px solid #dee2e6;
+}
+
+.dropdown-menu:after, .dropdown-menu:before {
+    bottom: 100%;
+    left: 10%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+}
+
+.dropdown-menu:after {
+    border-color: rgba(255, 255, 255, 0);
+    border-bottom-color: #ffffff;
+    border-width: 15px;
+    margin-left: -15px;
+}
+
+.dropdown-menu:before {
+    border-color: rgba(0, 0, 0, 0);
+    border-bottom-color: #dee2e6;
+    border-width: 16px;
+    margin-left: -16px;
+}
+
+.modal-open {
+    overflow: scroll;
+}
+
+.custom-menu {
+    display: none;
+    z-index: 1000;
+    position: absolute;
+    overflow: hidden;
+    border: 1px solid #cccccc;
+    white-space: nowrap;
+    background: #fff;
+    border-radius: 4px;
+    padding: 0;
+}
+
+.custom-menu li {
+    padding: 8px 12px;
+    cursor: pointer;
+    list-style-type: none;
+    transition: all .3s ease;
+    user-select: none;
+}
+
+.custom-menu li:hover {
+    background-color: #cccccc;
 }

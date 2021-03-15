@@ -11,10 +11,11 @@
         sizes="16x16" type="image/png">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="bootstrap/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="jquery/jquery.min.js"></script>
+    <link rel="stylesheet" href="content/font-awesome.min.css">
+    <script src="script/jquery.min.js"></script>
     <script src="bootstrap/bootstrap.min.js"></script>
     <script src="bootstrap/popper.min.js"></script>
+    <script src="script/a076d05399.js"></script>
 </head>
 
 <body>
@@ -136,7 +137,7 @@
         </div>
     </div>
 
-    <!-- modal thêm nhân viên  -->
+    <!-- Modal thêm nhân viên  -->
     <div class="modal fade" id="add-employee-modal">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
@@ -151,11 +152,11 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-2 pr-0">
-                            <!-- <img src="img/default-avatar.jpg" class="rounded-circle border-grey" alt="Ảnh đại diện" width="200" height="200">
-                    <p>Vui lòng chọn ảnh có định dạng .jpg, .jpeg, .png, .gif</p> -->
                             <figure>
-                                <img src="img/default-avatar.jpg" class="rounded-circle border-grey" alt="Ảnh đại diện"
-                                    width="100%">
+                                <img src="img/default-avatar.jpg" id="avatar-img" class="rounded-circle border-grey"
+                                    alt="Ảnh đại diện" width="100%">
+                                <input type="file" id="avatar-file" accept="image/x-png,image/gif,image/jpeg,image/jpg"
+                                    style="display: none;" />
                                 <figcaption class="text-center">(Vui lòng chọn ảnh có định dạng .jpg, .jpeg, .png, .gif)
                                 </figcaption>
                             </figure>
@@ -313,10 +314,217 @@
                 <!-- Modal footer -->
                 <div class="modal-footer bg-grey">
                     <button type="button" class="btn btn-modal-footer" data-dismiss="modal">Hủy</button>
-                    <button id="save-employee-btn" class="btn btn-green btn-modal-footer"><img class="img-btn" src="icon/add.png" alt="Lưu"
-                                    title="Lưu nhân viên mới">Lưu</button>
+                    <button id="add-employee-btn" class="btn btn-green btn-modal-footer"><img class="img-btn"
+                            src="icon/add.png" alt="Lưu" title="Lưu nhân viên mới">Lưu</button>
                 </div>
 
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal sửa thông tin  -->
+    <div class="modal fade" id="edit-employee-modal">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">THÔNG TIN NHÂN VIÊN</h4>
+                    <input type="hidden" id="edit-employee-id">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-2 pr-0">
+                            <figure>
+                                <img src="img/default-avatar.jpg" id="edit-avatar-img" class="rounded-circle border-grey"
+                                    alt="Ảnh đại diện" width="100%">
+                                <input type="file" id="edit-avatar-file" accept="image/x-png,image/gif,image/jpeg,image/jpg"
+                                    style="display: none;" />
+                                <figcaption class="text-center">(Vui lòng chọn ảnh có định dạng .jpg, .jpeg, .png, .gif)
+                                </figcaption>
+                            </figure>
+                        </div>
+                        <div class="col-10">
+                            <h5>A.THÔNG TIN CHUNG:</h5>
+                            <hr class="hr-green">
+                            <br>
+
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="edit-employee-code">Mã nhân viên (<p class="text-danger d-inline">*</p>
+                                            )</label>
+                                        <input type="text" class="form-control" id="edit-employee-code">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="edit-full-name">Họ và tên (<p class="text-danger d-inline">*</p>)</label>
+                                        <input type="text" class="form-control" id="edit-full-name">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="edit-date-of-birth">Ngày sinh</label>
+                                        <input type="date" class="form-control" id="edit-date-of-birth">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="edit-gender">Giới tính</label>
+                                        <select class="form-control" id="edit-gender">
+                                            <option value="1">Nam</option>
+                                            <option value="0">Nữ</option>
+                                            <option value="3">Khác</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="edit-identity-number">Số CMTND/ Căn cước (<p
+                                                class="text-danger d-inline">*</p>
+                                            )</label>
+                                        <input type="text" class="form-control" id="edit-identity-number">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="edit-identity-date">Ngày cấp</label>
+                                        <input type="date" class="form-control" id="edit-identity-date">
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="edit-identity-place">Nơi cấp</label>
+                                        <input type="text" class="form-control" id="edit-identity-place">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="edit-email">Email (<p class="text-danger d-inline">*</p>
+                                            )</label>
+                                        <input type="email" class="form-control" id="edit-email">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="edit-phone-number">Số điện thoại (<p class="text-danger d-inline">*</p>
+                                            )</label>
+                                        <input type="tel" class="form-control" id="edit-phone-number">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h5>B.THÔNG TIN CÔNG VIỆC:</h5>
+                            <hr class="hr-green">
+                            <br>
+
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <div class="form-group">
+                                            <label for="edit-position-name">Vị trí</label>
+                                            <select class="form-control" id="edit-position-name">
+                                                <option value="1">Chủ tịch</option>
+                                                <option value="2">Giám đốc</option>
+                                                <option value="3">Phó giám đốc</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="edit-department-name">Phòng ban</label>
+                                        <select class="form-control" id="edit-department-name">
+                                            <option value="1">Phòng nhân sự</option>
+                                            <option value="2">Phòng đào tạo</option>
+                                            <option value="3">Phòng Marketing</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="edit-personal-tax-code">Mã số thuế cá nhân</label>
+                                        <input type="text" class="form-control" id="edit-personal-tax-code">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="edit-salary">Mức lương cơ bản</label>
+                                        <input type="text" class="form-control text-right" id="edit-salary">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="edit-join-date">Ngày gia nhập công ty</label>
+                                        <input type="date" class="form-control" id="edit-join-date">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="edit-work-status-name">Tình trạng công việc</label>
+                                        <select class="form-control" id="edit-work-status-name">
+                                            <option value="1">Đang làm việc</option>
+                                            <option value="2">Đang thử việc</option>
+                                            <option value="3">Xem xét</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer bg-grey">
+                    <button type="button" class="btn btn-modal-footer" data-dismiss="modal">Hủy</button>
+                    <button id="edit-employee-btn" class="btn btn-green btn-modal-footer"><img class="img-btn"
+                            src="icon/add.png" alt="Lưu" title="Lưu nhân viên mới">Lưu</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!--Modal xóa nhân viên-->
+    <div class="modal fade" id="delete-employee-modal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Bạn có chắc chắn muốn xóa</h5>
+                    <input type="hidden" id="delete-employee-id">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                </div>
+                <div class="modal-footer" style="justify-content: flex-start">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                    <button class="btn btn-danger" id="delete-employee-btn">Xóa</button>
+                </div>
             </div>
         </div>
     </div>
