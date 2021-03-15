@@ -1,3 +1,7 @@
+html {
+    scroll-behavior: smooth;
+}
+
 a {
     color: #000 !important;
 }
@@ -9,11 +13,6 @@ a:hover {
 .row {
     margin-right: 0 !important;
 }
-
-#doc {
-    /* display: flex; */
-}
-
 
 #main-content {
     width: auto;
@@ -190,11 +189,11 @@ th {
 }
 
 /* CSS modal  */
-.border-grey{
+.border-grey {
     border: 1px solid #E5E5E5 !important;
 }
 
-.hr-green{
+.hr-green {
     background-color: #019160;
     width: 100px;
     height: 4px;
@@ -202,11 +201,12 @@ th {
     margin: 0;
 }
 
-#add-employee-modal input, #add-employee-modal select{
+#add-employee-modal input,
+#add-employee-modal select {
     color: #000;
 }
 
-.btn-modal-footer{
-    width:100px;
+.btn-modal-footer {
+    width: 100px;
     height: 44px;
 }

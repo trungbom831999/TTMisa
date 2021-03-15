@@ -10,9 +10,9 @@ xhttp.onreadystatechange = function () {
 xhttp.open("GET", "http://api.manhnv.net/api/employees", true);
 xhttp.send();
 
-function loadDataEmployeesToTable(data){
+function loadDataEmployeesToTable(data) {
     var table = $('#tbody-employees');
-    for(let i=0; i<data.length; i++){
+    for (let i = 0; i < data.length; i++) {
         let row = `<tr>
         <td>${data[i].EmployeeCode}</td>
         <td>${data[i].FullName}</td>
@@ -25,31 +25,36 @@ function loadDataEmployeesToTable(data){
         <td class="text-right">${checkNullValue(data[i].Salary)}</td>
         <td>${checkNullValue(data[i].WorkStatusName)}</td>
     </tr>`;
-     
-    
-    table.append(row);
+
+
+        table.append(row);
     }
 }
 
-function genderDetermination(number){
+function genderDetermination(number) {
     var gender;
-        if(number == 0){
-            gender = "Nữ";
-        }
-        else if(number == 1){
-            gender = "Nam";
-        }
-        else{
-            gender = "";
-        }
-    return gender;
-} 
-
-function checkNullValue(value){
-    if(value){
-        return value;
+    if (number == 0) {
+        gender = "Nữ";
+    } else if (number == 1) {
+        gender = "Nam";
+    } else {
+        gender = "";
     }
-    else{
+    return gender;
+}
+
+function changeDatetimeToDate(datetime) {
+    if (datetime) {
+        datetime = Date.parse(datetime);
+        return(datetime.toString('dd/mm/yyyy HH:mm:ss GMT'));
+    }
+    return '';
+}
+
+function checkNullValue(value) {
+    if (value) {
+        return value;
+    } else {
         return '';
     }
 }
