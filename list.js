@@ -76,7 +76,7 @@ function genderDetermination(gender) {
         case 1:
             return "Nam";
         default:
-            "";
+            return "";
     }
 }
 
