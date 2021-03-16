@@ -19,6 +19,16 @@
 </head>
 
 <body>
+    <div class="alert alert-success" id="success-alert">
+        <button type="button" class="close close-alert-btn" data-dismiss="alert"> x </button>
+        <strong id="success-alert-content"></strong>
+    </div>
+
+    <div class="alert alert-warning" id="warning-alert">
+        <button type="button" class="close close-alert-btn" data-dismiss="alert"> x </button>
+        <strong id="warning-alert-content"></strong>
+    </div>
+
     <div id="doc">
         <div id="side-bar">
             <div style="padding-bottom: 12px;">
@@ -153,10 +163,17 @@
                     <div class="row">
                         <div class="col-2 pr-0">
                             <figure>
-                                <img src="img/default-avatar.jpg" id="avatar-img" class="rounded-circle border-grey"
+                                <img src="img/default-avatar.jpg" id="avatar-img" class="rounded-circle border-grey img-thumbnail"
                                     alt="Ảnh đại diện" width="100%">
-                                <input type="file" id="avatar-file" accept="image/x-png,image/gif,image/jpeg,image/jpg"
-                                    style="display: none;" />
+                                <input type="file" id="avatar-file" name="img[]" class="file"
+                                    accept="image/x-png,image/gif,image/jpeg,image/jpg" style="display: none;">
+                                <div class="input-group my-3" style="display: none;">
+                                    <input type="text" class="form-control" disabled placeholder="Upload File"
+                                        id="avatar-file-src">
+                                    <div class="input-group-append">
+                                        <button type="button" class="browse btn btn-primary">Browse...</button>
+                                    </div>
+                                </div>
                                 <figcaption class="text-center">(Vui lòng chọn ảnh có định dạng .jpg, .jpeg, .png, .gif)
                                 </figcaption>
                             </figure>
@@ -195,7 +212,7 @@
                                         <select class="form-control" id="gender">
                                             <option value="1">Nam</option>
                                             <option value="0">Nữ</option>
-                                            <option value="3">Khác</option>
+                                            <option value="2">Khác</option>
                                         </select>
                                     </div>
                                 </div>
@@ -255,9 +272,11 @@
                                         <div class="form-group">
                                             <label for="position-name">Vị trí</label>
                                             <select class="form-control" id="position-name">
-                                                <option value="1">Chủ tịch</option>
-                                                <option value="2">Giám đốc</option>
-                                                <option value="3">Phó giám đốc</option>
+                                                <option value="3700cc49-55b5-69ea-4929-a2925c0f334d">Giám đốc</option>
+                                                <option value="25c6c36e-1668-7d10-6e09-bf1378b8dc91">Thu ngân</option>
+                                                <option value="148ed882-32b8-218e-9c20-39c2f00615e8">Nhân viên
+                                                    Marketting</option>
+                                                <option value="0">Chưa xác định</option>
                                             </select>
                                         </div>
                                     </div>
@@ -266,9 +285,13 @@
                                     <div class="form-group">
                                         <label for="department-name">Phòng ban</label>
                                         <select class="form-control" id="department-name">
-                                            <option value="1">Phòng nhân sự</option>
-                                            <option value="2">Phòng đào tạo</option>
-                                            <option value="3">Phòng Marketing</option>
+                                            <option value="469b3ece-744a-45d5-957d-e8c757976496">Phòng nhân sự</option>
+                                            <option value="17120d02-6ab5-3e43-18cb-66948daf6128">Phòng đào tạo</option>
+                                            <option value="142cb08f-7c31-21fa-8e90-67245e8b283e">Phòng Marketing
+                                            </option>
+                                            <option value="4e272fc4-7875-78d6-7d32-6a1673ffca7c">Phòng Công nghệ
+                                            </option>
+                                            <option value="0">Chưa xác định</option>
                                         </select>
                                     </div>
                                 </div>
@@ -303,6 +326,8 @@
                                             <option value="1">Đang làm việc</option>
                                             <option value="2">Đang thử việc</option>
                                             <option value="3">Xem xét</option>
+                                            <option value="0">Đã nghỉ việc</option>
+                                            <option value="5">Chưa xác định</option>
                                         </select>
                                     </div>
                                 </div>
@@ -339,10 +364,17 @@
                     <div class="row">
                         <div class="col-2 pr-0">
                             <figure>
-                                <img src="img/default-avatar.jpg" id="edit-avatar-img" class="rounded-circle border-grey"
+                                <img src="img/default-avatar.jpg" id="edit-avatar-img" class="rounded-circle border-grey img-thumbnail"
                                     alt="Ảnh đại diện" width="100%">
-                                <input type="file" id="edit-avatar-file" accept="image/x-png,image/gif,image/jpeg,image/jpg"
-                                    style="display: none;" />
+                                <input type="file" id="edit-avatar-file" name="img[]" class="file"
+                                    accept="image/x-png,image/gif,image/jpeg,image/jpg" style="display: none;">
+                                <div class="input-group my-3" style="display: none;">
+                                    <input type="text" class="form-control" disabled placeholder="Upload File"
+                                        id="edit-avatar-file-src">
+                                    <div class="input-group-append">
+                                        <button type="button" class="browse btn btn-primary">Browse...</button>
+                                    </div>
+                                </div>
                                 <figcaption class="text-center">(Vui lòng chọn ảnh có định dạng .jpg, .jpeg, .png, .gif)
                                 </figcaption>
                             </figure>
@@ -355,14 +387,16 @@
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label for="edit-employee-code">Mã nhân viên (<p class="text-danger d-inline">*</p>
+                                        <label for="edit-employee-code">Mã nhân viên (<p class="text-danger d-inline">*
+                                            </p>
                                             )</label>
                                         <input type="text" class="form-control" id="edit-employee-code">
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label for="edit-full-name">Họ và tên (<p class="text-danger d-inline">*</p>)</label>
+                                        <label for="edit-full-name">Họ và tên (<p class="text-danger d-inline">*</p>
+                                            )</label>
                                         <input type="text" class="form-control" id="edit-full-name">
                                     </div>
                                 </div>
@@ -381,7 +415,7 @@
                                         <select class="form-control" id="edit-gender">
                                             <option value="1">Nam</option>
                                             <option value="0">Nữ</option>
-                                            <option value="3">Khác</option>
+                                            <option value="2">Khác</option>
                                         </select>
                                     </div>
                                 </div>
@@ -424,7 +458,8 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label for="edit-phone-number">Số điện thoại (<p class="text-danger d-inline">*</p>
+                                        <label for="edit-phone-number">Số điện thoại (<p class="text-danger d-inline">*
+                                            </p>
                                             )</label>
                                         <input type="tel" class="form-control" id="edit-phone-number">
                                     </div>
@@ -439,11 +474,13 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <div class="form-group">
-                                            <label for="edit-position-name">Vị trí</label>
+                                            <label for="edit-position-name">Chức vụ</label>
                                             <select class="form-control" id="edit-position-name">
-                                                <option value="1">Chủ tịch</option>
-                                                <option value="2">Giám đốc</option>
-                                                <option value="3">Phó giám đốc</option>
+                                                <option value="3700cc49-55b5-69ea-4929-a2925c0f334d">Giám đốc</option>
+                                                <option value="25c6c36e-1668-7d10-6e09-bf1378b8dc91">Thu ngân</option>
+                                                <option value="148ed882-32b8-218e-9c20-39c2f00615e8">Nhân viên
+                                                    Marketting</option>
+                                                <option value="0">Chưa xác định</option>
                                             </select>
                                         </div>
                                     </div>
@@ -452,9 +489,13 @@
                                     <div class="form-group">
                                         <label for="edit-department-name">Phòng ban</label>
                                         <select class="form-control" id="edit-department-name">
-                                            <option value="1">Phòng nhân sự</option>
-                                            <option value="2">Phòng đào tạo</option>
-                                            <option value="3">Phòng Marketing</option>
+                                            <option value="469b3ece-744a-45d5-957d-e8c757976496">Phòng nhân sự</option>
+                                            <option value="17120d02-6ab5-3e43-18cb-66948daf6128">Phòng đào tạo</option>
+                                            <option value="142cb08f-7c31-21fa-8e90-67245e8b283e">Phòng Marketing
+                                            </option>
+                                            <option value="4e272fc4-7875-78d6-7d32-6a1673ffca7c">Phòng Công nghệ
+                                            </option>
+                                            <option value="0">Chưa xác định</option>
                                         </select>
                                     </div>
                                 </div>
@@ -489,6 +530,8 @@
                                             <option value="1">Đang làm việc</option>
                                             <option value="2">Đang thử việc</option>
                                             <option value="3">Xem xét</option>
+                                            <option value="0">Đã nghỉ việc</option>
+                                            <option value="5">Chưa xác định</option>
                                         </select>
                                     </div>
                                 </div>
@@ -528,6 +571,7 @@
             </div>
         </div>
     </div>
+
 </body>
 
 <!-- <script src="employee.js"></script> -->

@@ -87,6 +87,7 @@ a:hover {
 
 .img-avatar {
     width: 28px;
+    cursor: pointer;
 }
 
 /* CSS content  */
@@ -133,6 +134,7 @@ th {
     position: sticky;
     top: 0;
     background-color: #fff;
+    white-space: nowrap;
 }
 
 /* custom scroll table */
@@ -210,6 +212,12 @@ th {
 
 #avatar-img {
     cursor: pointer;
+    object-fit: cover;
+}
+
+#edit-avatar-img {
+    cursor: pointer;
+    object-fit: cover;
 }
 
 #add-employee-modal input, #add-employee-modal select {
@@ -280,4 +288,24 @@ th {
 
 .custom-menu li:hover {
     background-color: #cccccc;
+}
+
+/* Alert */
+#success-alert, #warning-alert{
+    position: absolute;
+    top: 28px;
+    left: 50%;
+    z-index: 2000;
+    display: none;
+    
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.close-alert-btn{
+    margin-left: 16px;
+    margin-top: -2px;
 }

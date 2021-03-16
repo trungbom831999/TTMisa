@@ -5,6 +5,7 @@ function loadDataEmployees() {
         method: "GET"
     }).done(function (response) {
         var table = $('#tbody-employees');
+        table.empty();
         for (var i = 0; i < response.length; i++) {
             var row = $(`<tr class="employee-info">
             <td>${response[i].EmployeeCode}
@@ -39,10 +40,11 @@ function getEmployeeInfo(id) {
     $.ajax({
         url: "http://api.manhnv.net/api/employees/" + id,
         type: "GET",
-        data: {},
-        contentType: "application/json",
-        success: function (response) {
-            console.log(response);
+        data: "{}",
+        dataType: "json",
+        success: function (data) {
+            // console.log("get ok");
+            return data;
         }
     });
 }
@@ -58,18 +60,19 @@ function getEmployeeInAddForm() {
         IdentityPlace: $('#identity-place').val(),
         Email: $('#email').val(),
         PhoneNumber: $('#phone-number').val(),
-        PositionName: $('#position-name').val(),
-        DepartmentName: $('#department-name').val(),
+        PositionId: $('#position-name').val(),
+        DepartmentId: $('#department-name').val(),
         PersonalTaxCode: $('#personal-tax-code').val(),
         Salary: $('#salary').val(),
         JoinDate: $('#join-date').val(),
-        WorkStatusName: $('#work-status-name').val()
+        WorkStatus: $('#work-status-name').val()
     }
     return employee;
 }
 
-function getEmployeeInEditForm() {
+function getEmployeeInEditForm(id) {
     var employee = {
+        EmployeeId: id,
         EmployeeCode: $('#edit-employee-code').val(),
         FullName: $('#edit-full-name').val(),
         DateOfBirth: $('#edit-date-of-birth').val(),
@@ -79,15 +82,58 @@ function getEmployeeInEditForm() {
         IdentityPlace: $('#edit-identity-place').val(),
         Email: $('#edit-email').val(),
         PhoneNumber: $('#edit-phone-number').val(),
-        PositionName: $('#edit-position-name').val(),
-        DepartmentName: $('#edit-department-name').val(),
+        PositionId: $('#edit-position-name').val(),
+        DepartmentId: $('#edit-department-name').val(),
         PersonalTaxCode: $('#edit-personal-tax-code').val(),
         Salary: $('#edit-salary').val(),
         JoinDate: $('#edit-join-date').val(),
-        WorkStatusName: $('#edit-work-status-name').val()
+        WorkStatus: $('#edit-work-status-name').val()
     }
     return employee;
 }
+
+
+//Alert
+function showSuccessAlert(content) {
+    $('#success-alert-content').text(content);
+    $("#success-alert").fadeTo(4000, 500).slideUp(500, function () {
+        $("#success-alert").slideUp(500);
+    });
+};
+
+function showWarningAlert(content) {
+    $('#warning-alert-content').text(content);
+    $("#warning-alert").fadeTo(4000, 500).slideUp(500, function () {
+        $("#warning-alert").slideUp(500);
+    });
+};
+
+//Preview Avatar
+$('#avatar-file').change(function (e) {
+    var fileName = e.target.files[0].name;
+    $("#avatar-file-src").val(fileName);
+
+    var reader = new FileReader();
+    reader.onload = function (e) {
+        // get loaded data and render thumbnail.
+        document.getElementById("avatar-img").src = e.target.result;
+    };
+    // read the image file as a data URL.
+    reader.readAsDataURL(this.files[0]);
+});
+
+$('#edit-avatar-file').change(function (e) {
+    var fileName = e.target.files[0].name;
+    $("#edit-avatar-file-src").val(fileName);
+
+    var reader = new FileReader();
+    reader.onload = function (e) {
+        // get loaded data and render thumbnail.
+        document.getElementById("edit-avatar-img").src = e.target.result;
+    };
+    // read the image file as a data URL.
+    reader.readAsDataURL(this.files[0]);
+});
 
 //function Format
 function genderDetermination(gender) {
@@ -125,6 +171,14 @@ function changeDatetimeToDate(datetime) {
     return '';
 }
 
+function changeDatetimeToDateForInput(datetime) {
+    var date = new Date(datetime);
+
+    var dateString = date.getFullYear() + "-" + ("00" + (date.getMonth() + 1)).slice(-2) + "-" + ("00" + date.getDate()).slice(-2)
+    // console.log(dateString);
+    return dateString;
+}
+
 function checkNullValue(value) {
     if (value) {
         return value;
@@ -136,36 +190,75 @@ function checkNullValue(value) {
 
 //function Validate
 function validateAddForm(employee) {
-    if (!validateEmployeeCode(employee.EmployeeCode)) return false;
-    if (!validateFullName(employee.FullName)) return false;
-    if (!validateIdentityNumber(employee.IdentityNumber)) return false;
-    if (!validateEmail(employee.Email)) return false;
-    if (!validatePhoneNumber(employee.PhoneNumber)) return false;
+    if (!validateEmployeeCode(employee.EmployeeCode)) {
+        $('#employee-code').focus();
+        return false;
+    }
+    if (!validateFullName(employee.FullName)) {
+        $('#full-name').focus();
+        return false;
+    }
+    if (!validateIdentityNumber(employee.IdentityNumber)) {
+        $('#identity-number').focus();
+        return false;
+    }
+    if (!validateEmail(employee.Email)) {
+        $('#email').focus();
+        return false;
+    }
+    if (!validatePhoneNumber(employee.PhoneNumber)) {
+        $('#phone-number').focus();
+        return false;
+    }
+    return true;
+}
+
+function validateEditForm(employee) {
+    if (!validateEmployeeCode(employee.EmployeeCode)) {
+        $('#edit-employee-code').focus();
+        return false;
+    }
+    if (!validateFullName(employee.FullName)) {
+        $('#edit-full-name').focus();
+        return false;
+    }
+    if (!validateIdentityNumber(employee.IdentityNumber)) {
+        $('#edit-identity-number').focus();
+        return false;
+    }
+    if (!validateEmail(employee.Email)) {
+        $('#edit-email').focus();
+        return false;
+    }
+    if (!validatePhoneNumber(employee.PhoneNumber)) {
+        $('#edit-phone-number').focus();
+        return false;
+    }
     return true;
 }
 
 function validateEmployeeCode(employeeCode) {
+    employeeCode = employeeCode.trim();
     if (employeeCode == null || employeeCode == '') {
-        alert('Mã trống');
-        $('#employee-code').focus();
+        showWarningAlert('Mã nhân viên không được để trống');
         return false;
     }
     return true;
 }
 
 function validateFullName(employeeFullName) {
+    employeeFullName = employeeFullName.trim();
     if (employeeFullName == null || employeeFullName == '') {
-        alert('Họ tên trống');
-        $('#full-name').focus();
+        showWarningAlert('Họ tên không được để trống');
         return false;
     }
     return true;
 }
 
 function validateIdentityNumber(employeeIdentityNumber) {
+    employeeIdentityNumber = employeeIdentityNumber.trim();
     if (employeeIdentityNumber == null || employeeIdentityNumber == '') {
-        alert('Vui lòng điền số CMTND/ Căn cước');
-        $('#identity-number').focus();
+        showWarningAlert('Vui lòng điền số CMTND/ Căn cước');
         return false;
     }
     return true;
@@ -174,23 +267,22 @@ function validateIdentityNumber(employeeIdentityNumber) {
 function validateEmail(employeeEmail) {
     var pattern = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 
+    employeeEmail = employeeEmail.trim();
     if (employeeEmail == null || employeeEmail == "") {
-        alert("Email không được trống");
-        $('#email').focus();
+        showWarningAlert("Email không được trống");
         return false;
     }
     else if (!pattern.test(employeeEmail)) {
-        alert('Email ko hợp lệ');
-        $('#email').focus();
+        showWarningAlert('Email không hợp lệ');
         return false;
     }
     return true;
 }
 
 function validatePhoneNumber(employeePhone) {
+    employeePhone = employeePhone.trim();
     if (employeePhone == null || employeePhone == "") {
-        alert("Số điện thoại không được trống");
-        $('#phone-number').focus();
+        showWarningAlert("Số điện thoại không được trống");
         return false;
     }
     var phone = employeePhone.trim();
@@ -210,14 +302,17 @@ function validatePhoneNumber(employeePhone) {
             }
         }
     }
-    alert("Số điện thoại không hợp lệ");
-    $('#phone-number').focus();
+    showWarningAlert("Số điện thoại không hợp lệ");
     return false;
 }
 
 //Event
 $('#add-employee-btn').click(function () {
     addNewEmployee();
+});
+
+$('#edit-employee-btn').click(function () {
+    editEmployeeInfo();
 });
 
 //right click to show menu
@@ -241,7 +336,6 @@ function trRightClick() {
         // If the clicked element is not the menu
         if (!$(e.target).parents(".custom-menu").length > 0) {
 
-            // Hide it
             $(".custom-menu").hide(100);
         }
     });
@@ -267,6 +361,11 @@ $("#avatar-img").click(function () {
     $("#avatar-file").click();
 });
 
+$("#edit-avatar-img").click(function () {
+    $("#edit-avatar-file").click();
+});
+
+
 //Thêm nhân viên modal
 function addNewEmployee() {
     var employee = getEmployeeInAddForm();
@@ -279,10 +378,12 @@ function addNewEmployee() {
             contentType: "application/json"
         }).done(function (response) {
             $('#add-employee-modal').modal('hide');
-            alert("Thêm thành công");
+            showSuccessAlert("Thêm thành công");
             loadDataEmployees();
         }).fail(function (response) {
-
+            var noti = JSON.parse(response.responseText);
+            console.log(noti.Msg[0]);
+            showWarningAlert(noti.Msg[0]);
         });
     }
 }
@@ -291,30 +392,61 @@ function addNewEmployee() {
 $('#edit-employee-modal').on('show.bs.modal', function (event) {
     var id = $(event.relatedTarget).parents('tr').data('id');
     $('#edit-employee-id').attr("value", id);
-    var employee = getEmployeeInfo(id);
-    $('#edit-employee-code').val(employee.EmployeeCode);
-    $('#edit-full-name').val(employee.FullName);
-    $('#edit-date-of-birth').val(employee.DateOfBirth);
-    $('#edit-gender').val(employee.Gender);
-    $('#edit-identity-number').val(employee.IdentityNumber);
-    $('#edit-identity-date').val(employee.IdentityDate);
-    $('#edit-identity-place').val(employee.IdentityPlace);
-    $('#edit-email').val(employee.Email);
-    $('#edit-phone-number').val(employee.PhoneNumber);
-    $('#edit-position-name').val(employee.PositionName);
-    $('#edit-department-name').val(employee.DepartmentName);
-    $('#edit-personal-tax-code').val(employee.PersonalTaxCode);
-    $('#edit-salary').val(employee.Salary);
-    $('#edit-join-date').val(employee.JoinDate);
-    $('#edit-work-status-name').val(employee.WorkStatusName);
-    
+    $.ajax({
+        url: "http://api.manhnv.net/api/employees/" + id,
+        type: "GET",
+        data: "{}",
+        dataType: "json",
+        success: function (data) {
+            $('#edit-employee-code').val(data.EmployeeCode);
+            $('#edit-full-name').val(data.FullName);
+            $('#edit-date-of-birth').val(changeDatetimeToDateForInput(data.DateOfBirth));
+            if (data.Gender != null) $('#edit-gender').val(data.Gender.toString());
+            else $('#edit-gender').val("2");
+            $('#edit-identity-number').val(checkNullValue(data.IdentityNumber));
+            $('#edit-identity-date').val(changeDatetimeToDateForInput(data.IdentityDate));
+            $('#edit-identity-place').val(checkNullValue(data.IdentityPlace));
+            $('#edit-email').val(checkNullValue(data.Email));
+            $('#edit-phone-number').val(checkNullValue(data.PhoneNumber));
+            if (data.PositionId != null) $('#edit-position-name').val(data.PositionId.toString());
+            else $('#edit-position-name').val("0");
+            if (data.DepartmentId != null) $('#edit-department-name').val(data.DepartmentId.toString());
+            else $('#edit-department-name').val("0");
+
+            $('#edit-personal-tax-code').val(checkNullValue(data.PersonalTaxCode));
+            $('#edit-salary').val(checkNullValue(data.Salary));
+            $('#edit-join-date').val(changeDatetimeToDateForInput(data.JoinDate));
+            if (data.WorkStatus != null) $('#edit-work-status-name').val(data.WorkStatus.toString());
+            else $('#edit-work-status-name').val("5");
+        }
+    });
 });
+
+function editEmployeeInfo() {
+    var id = $('#edit-employee-id').val();
+    var employee = getEmployeeInEditForm(id);
+    console.log(employee);
+    if (validateEditForm(employee)) {
+        $.ajax({
+            url: "http://api.manhnv.net/api/employees/" + id,
+            method: "PUT",
+            data: JSON.stringify(employee),
+            contentType: "application/json"
+        }).done(function (response) {
+            $('#edit-employee-modal').modal('hide');
+            showSuccessAlert("Sửa thông tin thành công");
+            loadDataEmployees();
+        }).fail(function (response) {
+
+        });
+    }
+}
 
 //Xóa nhân viên modal
 $('#delete-employee-modal').on('show.bs.modal', function (event) {
     // var button = $(event.relatedTarget);
     var id = $(event.relatedTarget).parents('tr').data('id');
-    $('#id-employee-delete').attr("value", id);
+    $('#delete-employee-id').attr("value", id);
     console.log(id);
     var modal = $(this);
     $.ajax({
@@ -331,7 +463,7 @@ $('#delete-employee-modal').on('show.bs.modal', function (event) {
 });
 
 $("#delete-employee-btn").on('click', function () {
-    var id = $('#id-employee-delete').val();
+    var id = $('#delete-employee-id').val();
     console.log(id);
     $.ajax({
         url: 'http://api.manhnv.net/api/employees/' + id,
@@ -339,11 +471,11 @@ $("#delete-employee-btn").on('click', function () {
         success: function (response) {
             if (response.status == true) {
                 $("#delete-employee-modal").hide();
-                alert("Xóa thành công");
+                showSuccessAlert("Xóa thành công");
                 loadDataEmployees();
             }
             else {
-                alert(response.Message);
+                console.log(response.Message);
             }
         },
         error: function (err) {
