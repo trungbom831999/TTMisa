@@ -1,4 +1,6 @@
-//Function API
+// split('.').join('');
+
+//Function load data
 function loadDataEmployees() {
     $.ajax({
         url: "http://api.manhnv.net/api/employees",
@@ -63,7 +65,7 @@ function getEmployeeInAddForm() {
         PositionId: $('#position-name').val(),
         DepartmentId: $('#department-name').val(),
         PersonalTaxCode: $('#personal-tax-code').val(),
-        Salary: $('#salary').val(),
+        Salary: $('#salary').val().split('.').join(''),
         JoinDate: $('#join-date').val(),
         WorkStatus: $('#work-status-name').val()
     }
@@ -85,11 +87,29 @@ function getEmployeeInEditForm(id) {
         PositionId: $('#edit-position-name').val(),
         DepartmentId: $('#edit-department-name').val(),
         PersonalTaxCode: $('#edit-personal-tax-code').val(),
-        Salary: $('#edit-salary').val(),
+        Salary: $('#edit-salary').val().split('.').join(''),
         JoinDate: $('#edit-join-date').val(),
         WorkStatus: $('#edit-work-status-name').val()
     }
     return employee;
+}
+
+function clearEmployeeInAddForm() {
+    $('#employee-code').val("");
+    $('#full-name').val("");
+    $('#date-of-birth').val("");
+    $('#gender').val("1");
+    $('#identity-number').val("");
+    $('#identity-date').val("");
+    $('#identity-place').val("");
+    $('#email').val("");
+    $('#phone-number').val("");
+    $('#position-name').val("3700cc49-55b5-69ea-4929-a2925c0f334d");
+    $('#department-name').val("469b3ece-744a-45d5-957d-e8c757976496");
+    $('#personal-tax-code').val("");
+    $('#salary').val("");
+    $('#join-date').val("");
+    $('#work-status-name').val("1");
 }
 
 
@@ -306,6 +326,30 @@ function validatePhoneNumber(employeePhone) {
     return false;
 }
 
+function setInputFilter(textbox, inputFilter) {
+    ["input", "keydown", "keyup", "mousedown", "mouseup", "select", "contextmenu", "drop"].forEach(function (event) {
+        textbox.addEventListener(event, function () {
+            if (inputFilter(this.value)) {
+                this.oldValue = this.value;
+                this.oldSelectionStart = this.selectionStart;
+                this.oldSelectionEnd = this.selectionEnd;
+            } else if (this.hasOwnProperty("oldValue")) {
+                this.value = this.oldValue;
+                this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
+            } else {
+                this.value = "";
+            }
+        });
+    });
+}
+
+setInputFilter(document.getElementById("salary"), function (value) {
+    return /^-?\d*$/.test(value);
+});
+setInputFilter(document.getElementById("edit-salary"), function (value) {
+    return /^-?\d*$/.test(value);
+});
+
 //Event
 $('#add-employee-btn').click(function () {
     addNewEmployee();
@@ -313,6 +357,16 @@ $('#add-employee-btn').click(function () {
 
 $('#edit-employee-btn').click(function () {
     editEmployeeInfo();
+});
+
+$('#salary').keyup(function () {
+    var salaryReplace = $('#salary').val().split('.').join('').replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    $('#salary').val(salaryReplace);
+});
+
+$('#edit-salary').keyup(function () {
+    var salaryReplace = $('#edit-salary').val().split('.').join('').replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    $('#edit-salary').val(salaryReplace);
 });
 
 //right click to show menu
@@ -380,9 +434,9 @@ function addNewEmployee() {
             $('#add-employee-modal').modal('hide');
             showSuccessAlert("Thêm thành công");
             loadDataEmployees();
+            clearEmployeeInAddForm();
         }).fail(function (response) {
             var noti = JSON.parse(response.responseText);
-            console.log(noti.Msg[0]);
             showWarningAlert(noti.Msg[0]);
         });
     }
@@ -414,7 +468,7 @@ $('#edit-employee-modal').on('show.bs.modal', function (event) {
             else $('#edit-department-name').val("0");
 
             $('#edit-personal-tax-code').val(checkNullValue(data.PersonalTaxCode));
-            $('#edit-salary').val(checkNullValue(data.Salary));
+            $('#edit-salary').val(checkNullValue(data.Salary).toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."));
             $('#edit-join-date').val(changeDatetimeToDateForInput(data.JoinDate));
             if (data.WorkStatus != null) $('#edit-work-status-name').val(data.WorkStatus.toString());
             else $('#edit-work-status-name').val("5");
@@ -437,7 +491,8 @@ function editEmployeeInfo() {
             showSuccessAlert("Sửa thông tin thành công");
             loadDataEmployees();
         }).fail(function (response) {
-
+            var noti = JSON.parse(response.responseText);
+            showWarningAlert(noti.Msg[0]);
         });
     }
 }

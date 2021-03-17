@@ -229,6 +229,21 @@ th {
     height: 44px;
 }
 
+.salary-group{
+    display: flex;
+    flex-direction: row;
+}
+
+.input-salary{
+    padding-right: 60px !important;
+}
+
+.exchange-rate{
+    position: absolute;
+    top: 40px;
+    right: 26px;
+}
+
 /* CSS menu right click   */
 
 .dropdown-menu {
