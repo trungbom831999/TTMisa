@@ -326,30 +326,6 @@ function validatePhoneNumber(employeePhone) {
     return false;
 }
 
-function setInputFilter(textbox, inputFilter) {
-    ["input", "keydown", "keyup", "mousedown", "mouseup", "select", "contextmenu", "drop"].forEach(function (event) {
-        textbox.addEventListener(event, function () {
-            if (inputFilter(this.value)) {
-                this.oldValue = this.value;
-                this.oldSelectionStart = this.selectionStart;
-                this.oldSelectionEnd = this.selectionEnd;
-            } else if (this.hasOwnProperty("oldValue")) {
-                this.value = this.oldValue;
-                this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
-            } else {
-                this.value = "";
-            }
-        });
-    });
-}
-
-setInputFilter(document.getElementById("salary"), function (value) {
-    return /^-?\d*$/.test(value);
-});
-setInputFilter(document.getElementById("edit-salary"), function (value) {
-    return /^-?\d*$/.test(value);
-});
-
 //Event
 $('#add-employee-btn').click(function () {
     addNewEmployee();
@@ -367,6 +343,20 @@ $('#salary').keyup(function () {
 $('#edit-salary').keyup(function () {
     var salaryReplace = $('#edit-salary').val().split('.').join('').replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     $('#edit-salary').val(salaryReplace);
+});
+
+$("#salary").on("keypress keyup blur", function (event) {
+    $(this).val($(this).val().replace(/[^0-9\.]/g, ''));
+    if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+        event.preventDefault();
+    }
+});
+
+$("#edit-salary").on("keypress keyup blur", function (event) {
+    $(this).val($(this).val().replace(/[^0-9\.]/g, ''));
+    if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+        event.preventDefault();
+    }
 });
 
 //right click to show menu
