@@ -1,19 +1,19 @@
-// split('.').join('');
-
 //Function load data
 function loadDataEmployees() {
+    $('#spinner-load-data').css('display', 'block');
     $.ajax({
         url: "http://api.manhnv.net/api/employees",
         method: "GET"
     }).done(function (response) {
+        $('#spinner-load-data').css('display', 'none');
         var table = $('#tbody-employees');
         table.empty();
         for (var i = 0; i < response.length; i++) {
             var row = $(`<tr class="employee-info">
             <td>${response[i].EmployeeCode}
             <ul class="custom-menu">
-            <li data-toggle="modal"data-target="#edit-employee-modal"><i class="fas fa-edit"></i> Sửa</li>
-            <li data-toggle="modal" data-target="#delete-employee-modal"><i class="fas fa-trash-alt"></i> Xóa</li>
+            <li data-toggle="modal"data-target="#edit-employee-modal"><img class="img-btn" src="icon/setting.png" alt="Edit"> Sửa</li>
+            <li data-toggle="modal" data-target="#delete-employee-modal"><img class="img-btn" src="icon/setting.png" alt="Edit"> Xóa</li>
             </ul>
             </td>
             <td>${response[i].FullName}</td>
@@ -115,16 +115,20 @@ function clearEmployeeInAddForm() {
 
 //Alert
 function showSuccessAlert(content) {
-    $('#success-alert-content').text(content);
-    $("#success-alert").fadeTo(4000, 500).slideUp(500, function () {
-        $("#success-alert").slideUp(500);
+    $('#noti-alert').removeClass('alert-warning');
+    $('#noti-alert').addClass('alert-success');
+    $('#noti-alert-content').text(content);
+    $("#noti-alert").fadeTo(4000, 500).slideUp(500, function () {
+        $("#noti-alert").slideUp(500);
     });
 };
 
 function showWarningAlert(content) {
-    $('#warning-alert-content').text(content);
-    $("#warning-alert").fadeTo(4000, 500).slideUp(500, function () {
-        $("#warning-alert").slideUp(500);
+    $('#noti-alert').removeClass('alert-success');
+    $('#noti-alert').addClass('alert-warning');
+    $('#noti-alert-content').text(content);
+    $("#noti-alert").fadeTo(4000, 500).slideUp(500, function () {
+        $("#noti-alert").slideUp(500);
     });
 };
 

@@ -1,3 +1,13 @@
+/* CSS chung */
+@font-face {
+    font-family: myFont;
+    src: url(font/GoogleSans-Light.otf);
+ }
+
+ *{
+    font-family: myFont !important;
+ }
+
 html {
     scroll-behavior: smooth;
 }
@@ -11,7 +21,19 @@ a:hover {
 }
 
 .row {
-    margin-right: 0 !important;
+    margin: 0 !important;
+}
+
+.can-click{
+    cursor: pointer;
+}
+
+.dropdown-item:hover{
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.dropdown-item:hover{
+    background-color: #cccccc !important;
 }
 
 #main-content {
@@ -60,6 +82,7 @@ a:hover {
 
 #header {
     border-bottom: 1px solid #cccccc;
+    border-left: 1px solid #cccccc;
 }
 
 #select-restaurant {
@@ -109,10 +132,23 @@ a:hover {
     background-color: #2FBE8E !important;
 }
 
+#add-btn{
+    width: 54px; 
+    white-space: nowrap;
+    -webkit-transition:width 500ms;
+	-moz-transition:width 500ms;
+	transition:width 500ms;
+    overflow: hidden;
+}
+
+#add-btn:hover{
+    width: 188px;
+    white-space: nowrap;
+}
+
 #search-input {
     background: url(icon/search.png) no-repeat scroll 8px;
     padding-left: 30px;
-    width: 350px;
 }
 
 #refesh-btn {
@@ -127,7 +163,7 @@ th {
 
 #info-employees {
     overflow-y: auto;
-    height: 75vh;
+    height: 76vh;
 }
 
 #info-employees thead th {
@@ -245,38 +281,6 @@ th {
 }
 
 /* CSS menu right click   */
-
-.dropdown-menu {
-    position: relative;
-    background: #ffffff;
-    border: 1px solid #dee2e6;
-}
-
-.dropdown-menu:after, .dropdown-menu:before {
-    bottom: 100%;
-    left: 10%;
-    border: solid transparent;
-    content: " ";
-    height: 0;
-    width: 0;
-    position: absolute;
-    pointer-events: none;
-}
-
-.dropdown-menu:after {
-    border-color: rgba(255, 255, 255, 0);
-    border-bottom-color: #ffffff;
-    border-width: 15px;
-    margin-left: -15px;
-}
-
-.dropdown-menu:before {
-    border-color: rgba(0, 0, 0, 0);
-    border-bottom-color: #dee2e6;
-    border-width: 16px;
-    margin-left: -16px;
-}
-
 .modal-open {
     overflow: scroll;
 }
@@ -294,7 +298,7 @@ th {
 }
 
 .custom-menu li {
-    padding: 8px 12px;
+    padding: 8px 12px 8px 0px;
     cursor: pointer;
     list-style-type: none;
     transition: all .3s ease;
@@ -306,8 +310,8 @@ th {
 }
 
 /* Alert */
-#success-alert, #warning-alert{
-    position: absolute;
+.alert{
+    position: absolute !important;
     top: 28px;
     left: 50%;
     z-index: 2000;

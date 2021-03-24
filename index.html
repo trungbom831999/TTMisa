@@ -10,142 +10,154 @@
         href="https://gamek.mediacdn.vn/thumb_w/600/2017/smile-emojis-icon-facebook-funny-emotion-women-s-premium-long-sleeve-t-shirt-1500882676711.jpg"
         sizes="16x16" type="image/png">
     <link rel="stylesheet" href="style.css">
+    <!-- <link rel="stylesheet" href="content/font-awesome.min.css"> -->
     <link rel="stylesheet" href="bootstrap/bootstrap.min.css">
-    <link rel="stylesheet" href="content/font-awesome.min.css">
     <script src="script/jquery.min.js"></script>
-    <script src="bootstrap/bootstrap.min.js"></script>
     <script src="bootstrap/popper.min.js"></script>
-    <script src="script/a076d05399.js"></script>
+    <script src="bootstrap/bootstrap.min.js"></script>
 </head>
 
 <body>
-    <div class="alert alert-success" id="success-alert">
+    <div class="alert" id="noti-alert">
         <button type="button" class="close close-alert-btn" data-dismiss="alert"> x </button>
-        <strong id="success-alert-content"></strong>
+        <strong id="noti-alert-content"></strong>
     </div>
 
-    <div class="alert alert-warning" id="warning-alert">
-        <button type="button" class="close close-alert-btn" data-dismiss="alert"> x </button>
-        <strong id="warning-alert-content"></strong>
-    </div>
-
-    <div id="doc">
-        <div id="side-bar">
-            <div style="padding-bottom: 12px;">
-                <img class="img-toggle" src="img/toggle.png" alt="toggle">
-                <img id="logo" src="img/cukcuk-logo.png" alt="logo">
-            </div>
-            <button class="btn"><img class="img-btn" src="icon/dashboard.png" alt="tổng quan"> Tổng quan</button>
-            <button class="btn"><img class="img-btn" src="icon/report.png" alt="tổng quan"> Báo cáo</button>
-            <button class="btn"><img class="img-btn" src="icon/dashboard.png" alt="tổng quan"> Mua hàng</button>
-            <button class="btn"><img class="img-btn" src="icon/dic-employee.png" alt="tổng quan"> Danh mục nhân
-                viên</button>
-            <button class="btn"><img class="img-btn" src="icon/dic-employee.png" alt="tổng quan"> Danh mục nhân
-                viên</button>
-            <button class="btn"><img class="img-btn" src="icon/setting.png" alt="tổng quan"> Thiết lập hệ thống</button>
+    <div id="side-bar">
+        <div style="padding-bottom: 12px;">
+            <img class="img-toggle" src="img/toggle.png" alt="toggle">
+            <img id="logo" src="img/cukcuk-logo.png" alt="logo">
         </div>
-        <div id="main-content">
-            <div class="row" id="header">
-                <div class="col-12 col-md-6">
-                    <select name="restaurant" id="select-restaurant">
-                        <option selected>Nhà hàng Biển Đông</option>
-                        <option>Nhà hàng biển Động</option>
-                    </select>
-                </div>
+        <button class="btn"><img class="img-btn" src="icon/dashboard.png" alt="Tổng quan"> Tổng quan</button>
+        <button class="btn"><img class="img-btn" src="icon/report.png" alt="Báo cáo"> Báo cáo</button>
+        <button class="btn"><img class="img-btn" src="icon/dashboard.png" alt="Mua hàng"> Mua hàng</button>
+        <button class="btn"><img class="img-btn" src="icon/dic-employee.png" alt="Danh mục nhân viên"> Danh mục nhân
+            viên</button>
+        <button class="btn"><img class="img-btn" src="icon/setting.png" alt="tThiết lập"> Thiết lập hệ
+            thống</button>
+    </div>
+    <div id="main-content">
+        <div class="row" id="header">
+            <div class="col-12 col-md-6 pl-1 order-10 order-md-1">
+                <select class="pl-0 can-click" name="restaurant" id="select-restaurant">
+                    <option selected>Nhà hàng Biển Đông</option>
+                    <option>Nhà hàng biển Động</option>
+                </select>
+            </div>
 
-                <div class="col-12 col-md-6">
-                    <div id="info" class="fr-md">
+            <div class="col-12 col-md-6 pl-2 order-1 order-md-10">
+                <div id="info" class="fr-md">
+                    <div class="dropdown">
                         <img class="img-avatar" src="icon/avatar-default.png" alt="avatar">
                         <a href="#" class="pl-2">Nguyễn Kiên Trung</a>
-                        <img class="pl-2" src="icon/option.png" alt="option" style="cursor: pointer;">
-                    </div>
-                </div>
-            </div>
-            <div id="content">
-                <div class="row" style="width: 100%;">
-                    <div class="col-12 col-md-6 ">
-                        <h4 style="padding-top: 4px;">Danh sách nhân viên</h4>
-                    </div>
-                    <div class="col-12 col-md-6 pr-0">
-                        <div class="fr-md">
-                            <button id="add-btn" class="btn btn-green" data-toggle="modal"
-                                data-target="#add-employee-modal"><img class="img-btn" src="icon/add.png" alt="thêm"
-                                    title="Thêm nhân viên mới"> Thêm
-                                nhân viên</button>
+                        <img class="pl-2 can-click" src="icon/option.png" alt="option" data-toggle="dropdown">
+                        <div class="dropdown-menu" style="margin-top: 10px;">
+                            <a class="dropdown-item" href="#">Thông tin tài khoản</a>
+                            <a class="dropdown-item" href="#">Đổi mật khẩu</a>
+                            <a class="dropdown-item" href="#">Đăng xuất</a>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div id="content">
+            <div class="row" style="width: 100%;">
+                <div class="col-12 col-md-6 p-0">
+                    <h4 class="font-weight-bold" style="padding-top: 4px;">Danh sách nhân viên</h4>
+                </div>
+                <div class="col-12 col-md-6 p-0">
+                    <div class="fr-md">
+                        <button id="add-btn" class="btn btn-green mr-3" data-toggle="modal"
+                            data-target="#add-employee-modal"><img class="img-btn mr-3" src="icon/add.png" alt="thêm"
+                                title="Thêm nhân viên mới"> Thêm
+                            nhân viên</button>
+                    </div>
+                </div>
+            </div>
 
-                <!-- input  -->
-                <div class="row mt-2" style="width: 100%;">
-                    <div class="col-12 col-md-10 form-inline">
+            <!-- input  -->
+            <div class="row mt-2" style="width: 100%;">
+                <div class="col-12 col-md-10 row p-0">
+                    <div class="col-md-4 col-12 pl-0">
                         <input type="text" class="form-control mr-2 mt-1" id="search-input"
-                            placeholder="Tìm kiếm theo Mã, Tên hoặc Số điện thoại">
-                        <select class="form-control mr-2 mt-1">
+                            placeholder="Tìm kiếm theo Mã, Tên hoặc Số điện thoại" width="100%">
+                    </div>
+                    <div class="col-md-4 col-12 pl-0">
+                        <select class="form-control mr-2 mt-1 can-click" width="100%">
                             <option selected>Tất cả phòng ban</option>
                             <option>Phòng ban 1</option>
                             <option>Phòng ban 2</option>
                             <option>Phòng ban 3</option>
                         </select>
-                        <select class="form-control mr-2 mt-1">
+                    </div>
+                    <div class="col-md-4 col-12 pl-0">
+                        <select class="form-control mr-2 mt-1 can-click" width="100%">
                             <option selected>Tất cả vị trí</option>
                             <option>Vị trí 1</option>
                             <option>Vị trí 2</option>
                             <option>Vị trí 3</option>
                         </select>
                     </div>
-                    <div class="col-12 col-md-2">
-                        <div class="fr-md">
-                            <button id="refesh-btn" class="btn mt-1"><img class="img-btn" src="icon/refresh.png"
-                                    alt="refesh" title="Tìm kiếm về mặc định"></button>
+                </div>
+                <div class="col-12 col-md-2 pl-0">
+                    <div class="fr-md">
+                        <button id="refesh-btn" class="btn mt-1" title="Tìm kiếm về mặc định"><img class="img-btn"
+                                src="icon/refresh.png" alt="refesh"></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- table employees -->
+            <div id="info-employees" class="mt-2 mr-3">
+                <table id="table-employees" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Mã nhân viên</th>
+                            <th>Họ và tên</th>
+                            <th>Giới tính</th>
+                            <th>Ngày sinh</th>
+                            <th>Điện thoại</th>
+                            <th>Email</th>
+                            <th>Chức vụ</th>
+                            <th>Phòng ban</th>
+                            <th class="text-right">Mức lương cơ bản</th>
+                            <th>Tình trạng công việc</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody-employees">
+                    </tbody>
+                </table>
+                <div id="spinner-load-data" style="display: none !important;">
+                    <div class="d-flex justify-content-center">
+                        <div class="spinner-border" role="status" style="color: #019160 !important;">
+                            <span class="sr-only">Loading...</span>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <!-- table  -->
-                <div id="info-employees" class="mt-2">
-                    <table id="table-employees" class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>Mã nhân viên</th>
-                                <th>Họ và tên</th>
-                                <th>Giới tính</th>
-                                <th>Ngày sinh</th>
-                                <th>Điện thoại</th>
-                                <th>Email</th>
-                                <th>Chức vụ</th>
-                                <th>Phòng ban</th>
-                                <th class="text-right">Mức lương cơ bản</th>
-                                <th>Tình trạng công việc</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tbody-employees">
-                        </tbody>
-                    </table>
+            <!-- pagination  -->
+            <div class="row mt-2">
+                <div class="col-md-3">
+                    <p class="pt-2 pl-0">Hiển thị 1-10/1000 nhân viên</p>
                 </div>
-
-                <!-- pagination  -->
-                <div class="row mt-2">
-                    <div class="col-md-3">
-                        <p class="pt-2 pl-3">Hiển thị 1-10/1000 nhân viên</p>
-                    </div>
-                    <div id="pagination" class="col-md-6 text-center">
-                        <button class="btn pagination-btn" id="first-page"></button>
-                        <button class="btn pagination-btn" id="prev-page"></button>
-                        <button class="btn pagination-btn bg-grey" id="current-page">1</button>
-                        <button class="btn pagination-btn bg-grey">2</button>
-                        <button class="btn pagination-btn bg-grey">3</button>
-                        <button class="btn pagination-btn bg-grey">4</button>
-                        <button class="btn pagination-btn" id="next-page"></button>
-                        <button class="btn pagination-btn" id="last-page"></button>
-                    </div>
-                    <div class="col-md-3 text-right">
-                        <p class="pt-2 pr-3">10 nhân viên/trang</p>
-                    </div>
+                <div id="pagination" class="col-md-6 text-center">
+                    <button class="btn pagination-btn" id="first-page" title="Trang đầu"></button>
+                    <button class="btn pagination-btn" id="prev-page" title="Trang trước"></button>
+                    <button class="btn pagination-btn bg-grey" id="current-page">1</button>
+                    <button class="btn pagination-btn bg-grey">2</button>
+                    <button class="btn pagination-btn bg-grey">3</button>
+                    <button class="btn pagination-btn bg-grey">4</button>
+                    <button class="btn pagination-btn" id="next-page" title="Trang sau"></button>
+                    <button class="btn pagination-btn" id="last-page" title="Trang cuối"></button>
+                </div>
+                <div class="col-md-3 text-right">
+                    <p class="pt-2 pr-3">10 nhân viên/trang</p>
                 </div>
             </div>
         </div>
     </div>
+
 
     <!-- Modal thêm nhân viên  -->
     <div class="modal fade" id="add-employee-modal">
@@ -163,8 +175,8 @@
                     <div class="row">
                         <div class="col-2 pr-0">
                             <figure>
-                                <img src="img/default-avatar.jpg" id="avatar-img" class="rounded-circle border-grey img-thumbnail"
-                                    alt="Ảnh đại diện" width="100%">
+                                <img src="img/default-avatar.jpg" id="avatar-img"
+                                    class="rounded-circle border-grey img-thumbnail" alt="Ảnh đại diện" width="100%">
                                 <input type="file" id="avatar-file" name="img[]" class="file"
                                     accept="image/x-png,image/gif,image/jpeg,image/jpg" style="display: none;">
                                 <div class="input-group my-3" style="display: none;">
@@ -179,8 +191,8 @@
                             </figure>
                         </div>
                         <div class="col-10">
-                            <h5>A.THÔNG TIN CHUNG:</h5>
-                            <hr class="hr-green">
+                            <h5 class="ml-3">A.THÔNG TIN CHUNG:</h5>
+                            <hr class="hr-green ml-3">
                             <br>
 
                             <div class="row">
@@ -262,8 +274,8 @@
                                 </div>
                             </div>
 
-                            <h5>B.THÔNG TIN CÔNG VIỆC:</h5>
-                            <hr class="hr-green">
+                            <h5 class="ml-3">B.THÔNG TIN CÔNG VIỆC:</h5>
+                            <hr class="hr-green ml-3">
                             <br>
 
                             <div class="row">
@@ -367,8 +379,8 @@
                     <div class="row">
                         <div class="col-2 pr-0">
                             <figure>
-                                <img src="img/default-avatar.jpg" id="edit-avatar-img" class="rounded-circle border-grey img-thumbnail"
-                                    alt="Ảnh đại diện" width="100%">
+                                <img src="img/default-avatar.jpg" id="edit-avatar-img"
+                                    class="rounded-circle border-grey img-thumbnail" alt="Ảnh đại diện" width="100%">
                                 <input type="file" id="edit-avatar-file" name="img[]" class="file"
                                     accept="image/x-png,image/gif,image/jpeg,image/jpg" style="display: none;">
                                 <div class="input-group my-3" style="display: none;">
@@ -383,8 +395,8 @@
                             </figure>
                         </div>
                         <div class="col-10">
-                            <h5>A.THÔNG TIN CHUNG:</h5>
-                            <hr class="hr-green">
+                            <h5 class="ml-3">A.THÔNG TIN CHUNG:</h5>
+                            <hr class="hr-green ml-3">
                             <br>
 
                             <div class="row">
@@ -469,8 +481,8 @@
                                 </div>
                             </div>
 
-                            <h5>B.THÔNG TIN CÔNG VIỆC:</h5>
-                            <hr class="hr-green">
+                            <h5 class="ml-3">B.THÔNG TIN CÔNG VIỆC:</h5>
+                            <hr class="hr-green ml-3">
                             <br>
 
                             <div class="row">
@@ -515,7 +527,8 @@
                                     <div class="form-group">
                                         <label for="edit-salary">Mức lương cơ bản</label>
                                         <div class="salary-group">
-                                            <input type="text" class="form-control text-right input-salary" id="edit-salary">
+                                            <input type="text" class="form-control text-right input-salary"
+                                                id="edit-salary">
                                             <label class="exchange-rate" for="edit-salary"><i>(VNĐ)</i></label>
                                         </div>
                                     </div>
@@ -562,7 +575,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Bạn có chắc chắn muốn xóa</h5>
+                    <h5 class="modal-title">Bạn có chắc chắn muốn xóa?</h5>
                     <input type="hidden" id="delete-employee-id">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
